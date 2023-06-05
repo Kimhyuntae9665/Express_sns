@@ -3,7 +3,7 @@ const {isLoggedIn,isNotLoggedIn} = require('./middlewares');
 
 const router = express.Router();
 
-router.get('./profile',isLoggedIn,(req,res)=>{
+router.get('/profile',isLoggedIn,(req,res)=>{
     res.render('profile',{title:'내 정보 - NodeBird',user:req.user});
 });
 
@@ -15,7 +15,7 @@ router.get('/join',isNotLoggedIn,(req,res)=>{
     });
 });
 
-router.get('./',(req,res,next)=>{
+router.get('/',(req,res,next)=>{
     res.render('main',{
         title:'NodeBird',
         twits:[],
