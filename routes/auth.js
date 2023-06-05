@@ -45,6 +45,7 @@ router.post('/login',isNotLoggedIn,(req,res,next)=>{
         }
         console.log("여기는 오나?")
         return req.login(user,(loginError)=>{
+            // ? req.login()메서드가 passport.serializer 호출
             if(loginError){
                 console.log("여기가 삑?3")
                 console.error(loginError);
