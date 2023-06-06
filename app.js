@@ -39,7 +39,11 @@ app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
 
+// ? Router 등록 과정 
+// ? '/' 로 시작되는 URL은 pageRouter에서 처리한다  
+// ? 가장 많은 경로가 여기서 처리 되기 때문에 가장 앞에 놔두는게 효율적 
 app.use('/',pageRouter);
+// ? '/auth' 로 시작되는 URL은 pageRouter에서 처리한다 
 app.use('/auth',authRouter);
 
 app.use((req,res,next)=>{
