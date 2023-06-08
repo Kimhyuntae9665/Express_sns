@@ -32,7 +32,7 @@ router.post('/join',isNotLoggedIn,async(req,res,next)=>{
 
 router.post('/login',isNotLoggedIn,(req,res,next)=>{
     passport.authenticate('local',(authError,user,info)=>{
-        console.log("어디가?");
+        console.log("여기가 로그인 router");
         if(authError){
             console.log("여기가 삑2");
             console.error(authError);

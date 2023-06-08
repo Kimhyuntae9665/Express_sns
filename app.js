@@ -48,6 +48,7 @@ app.use(passport.session());
 // ? 가장 많은 경로가 여기서 처리 되기 때문에 가장 앞에 놔두는게 효율적 
 app.use('/',pageRouter);
 // ? '/auth' 로 시작되는 URL은 pageRouter에서 처리한다 
+console.log("메인('/') 여기서 나온다 이제 auth로 가고 싶어 ")
 app.use('/auth',authRouter);
 app.use('/post',postRouter);
 app.use('/user',userRouter);
