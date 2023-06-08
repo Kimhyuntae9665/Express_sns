@@ -23,6 +23,7 @@ app.set('view engine','pug');
 app.set('port',process.env.PORT || 8001);
 
 app.use(morgan('dev'));
+console.log("여기가 가장 먼저 app.js?")
 app.use(express.static(path.join(__dirname,'public')));
 app.use('/img',express.static(path.join(__dirname,'uploads')));
 app.use(express.json());

@@ -2,11 +2,10 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-
 const { Post, Hashtag, User } = require('../models');
 const { isLoggedIn } = require('./middlewares');
-
 const router = express.Router();
+
 
 fs.readdir('uploads', (error) => {
   if (error) {
@@ -14,6 +13,7 @@ fs.readdir('uploads', (error) => {
     fs.mkdirSync('uploads');
   }
 });
+
 
 const upload = multer({
   storage: multer.diskStorage({
@@ -28,20 +28,26 @@ const upload = multer({
   limits: { fileSize: 5 * 1024 * 1024 },
 });
 
+
+
 router.post('/img', isLoggedIn, upload.single('img'), (req, res) => {
   console.log(req.file);
   res.json({ url: `/img/${req.file.filename}` });
 });
 
+
+
 const upload2 = multer();
 router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
   try {
-    console.log("게시물 올리니까 여기가 작동 ")
+    console.log("게시물 올리니까 여기가 작동 : 1번 ")
+
     const post = await Post.create({
       content: req.body.content,
       img: req.body.url,
       userId: req.user.id,
     });
+    
     const hashtags = req.body.content.match(/#[^\s]*/g);
     if (hashtags) {
       const result = await Promise.all(hashtags.map(tag => Hashtag.findOrCreate({
@@ -55,6 +61,9 @@ router.post('/', isLoggedIn, upload2.none(), async (req, res, next) => {
     next(error);
   }
 });
+
+
+
 
 router.get('/hashtag',async(req,res,next)=>{
     const query = req.query.hashtag;

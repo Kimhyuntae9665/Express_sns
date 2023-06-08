@@ -17,6 +17,7 @@ router.get('/join',isNotLoggedIn,(req,res)=>{
 });
 
 router.get('/',(req,res,next)=>{
+    console.log("여기가 메인 화면 렌더링 가장 먼저: 로그인 전 ")
     Post.findAll({
         include:{
             model:User,
@@ -25,6 +26,7 @@ router.get('/',(req,res,next)=>{
         order:[['createdAt','DESC']],
     })
     .then((posts)=>{
+        console.log("여기서 main 화면에 보여주는 게시물")
         res.render('main',{
             title:'NodeBird',
             twits:posts,
